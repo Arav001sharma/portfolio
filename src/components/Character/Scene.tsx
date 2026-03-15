@@ -17,7 +17,7 @@ const Scene = () => {
   const canvasDiv = useRef<HTMLDivElement | null>(null);
   const hoverDivRef = useRef<HTMLDivElement>(null);
   const sceneRef = useRef(new THREE.Scene());
-  const { setLoading } = useLoading();
+  const { setLoading, setIsLoading } = useLoading();
 
   const [character, setChar] = useState<THREE.Object3D | null>(null);
   useEffect(() => {
@@ -73,8 +73,10 @@ const Scene = () => {
             handleResize(renderer, camera, canvasDiv, character)
           );
         }
-      }).catch(() => {
+      }).catch((err) => {
+        console.error("Character failed to load:", err);
         progress.loaded();
+        setIsLoading(false);
       });
 
       let mouse = { x: 0, y: 0 },

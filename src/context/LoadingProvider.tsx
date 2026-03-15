@@ -24,7 +24,14 @@ export const LoadingProvider = ({ children }: PropsWithChildren) => {
     setIsLoading,
     setLoading,
   };
-  useEffect(() => {}, [loading]);
+  useEffect(() => {
+    if (!isLoading) return;
+    const timeout = setTimeout(() => {
+      console.warn("Loading timeout reached; hiding loader.");
+      setIsLoading(false);
+    }, 30000);
+    return () => clearTimeout(timeout);
+  }, [isLoading]);
 
   return (
     <LoadingContext.Provider value={value as LoadingType}>
