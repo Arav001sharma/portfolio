@@ -28,7 +28,13 @@ const MainContainer = ({ children }: PropsWithChildren) => {
       window.removeEventListener("resize", resizeHandler);
     };
   }, [isDesktopView]);
-
+  useEffect(() => {
+    import("./utils/initialFX").then((module) => {
+      if (module.initialFX) {
+        module.initialFX();
+      }
+    }).catch((err) => console.error("initialFX load error:", err));
+  }, []);
   return (
     <div className="container-main">
       <Cursor />
