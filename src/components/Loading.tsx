@@ -30,6 +30,8 @@ const Loading = ({ percent }: { percent: number }) => {
           setIsLoading(false);
         }, 900);
       }
+    }).catch(() => {
+      setIsLoading(false);
     });
   }, [isLoaded]);
 
