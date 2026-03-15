@@ -6,7 +6,7 @@ import { ScrollSmoother } from "gsap/ScrollSmoother";
 import "./styles/Navbar.css";
 
 gsap.registerPlugin(ScrollSmoother, ScrollTrigger);
-export let smoother: ScrollSmoother;
+export let smoother: ScrollSmoother | undefined;
 
 const Navbar = () => {
   useEffect(() => {

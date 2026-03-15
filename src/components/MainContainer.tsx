@@ -29,11 +29,13 @@ const MainContainer = ({ children }: PropsWithChildren) => {
     };
   }, [isDesktopView]);
   useEffect(() => {
-    import("./utils/initialFX").then((module) => {
-      if (module.initialFX) {
-        module.initialFX();
-      }
-    }).catch((err) => console.error("initialFX load error:", err));
+    setTimeout(() => {
+      import("./utils/initialFX").then((module) => {
+        if (module.initialFX) {
+          module.initialFX();
+        }
+      }).catch((err) => console.error("initialFX load error:", err));
+    }, 100);
   }, []);
   return (
     <div className="container-main">
