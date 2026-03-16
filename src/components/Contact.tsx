@@ -17,6 +17,12 @@ const Contact = () => {
                 abhisheksharma1102@proton.me, sharma343abhi@gmail.com
               </a>
             </p>
+            <h4>Phone</h4>
+            <p>
+              <a href="tel:9060511723" data-cursor="disable">
+                9060511723
+              </a>
+            </p>
             <h4>Education</h4>
             <p>B.Com Bachelors in Commerce</p>
           </div>
