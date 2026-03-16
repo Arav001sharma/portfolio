@@ -20,7 +20,7 @@ const Loading = ({ percent }: { percent: number }) => {
   }
 
   useEffect(() => {
-    import("./utils/initialFX").then((module) => {
+    import("./utils/initialFX").then(() => {
       if (isLoaded) {
         setClicked(true);
         setTimeout(() => {
