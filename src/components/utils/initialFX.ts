@@ -79,62 +79,34 @@ export function initialFX() {
   var landingText3 = new SplitText(".landing-h2-info-1", TextProps);
   var landingText4 = new SplitText(".landing-h2-1", TextProps);
   var landingText5 = new SplitText(".landing-h2-2", TextProps);
+  var landingText6 = new SplitText(".landing-h2-info-2", TextProps);
+  var landingText7 = new SplitText(".landing-h2-3", TextProps);
 
-  LoopText(landingText2, landingText3);
-  LoopText(landingText4, landingText5);
+  LoopText(landingText2, landingText3, landingText6);
+  LoopText(landingText4, landingText5, landingText7);
 }
 
-function LoopText(Text1: SplitText, Text2: SplitText) {
+function LoopText(Text1: SplitText, Text2: SplitText, Text3?: SplitText) {
   var tl = gsap.timeline({ repeat: -1, repeatDelay: 1 });
   const delay = 4;
   const delay2 = delay * 2 + 1;
+  const delay3 = delay * 3 + 2;
 
-  tl.fromTo(
-    Text2.chars,
-    { opacity: 0, y: 80 },
-    {
-      opacity: 1,
-      duration: 1.2,
-      ease: "power3.inOut",
-      y: 0,
-      stagger: 0.1,
-      delay: delay,
-    },
-    0
-  )
-    .fromTo(
-      Text1.chars,
-      { y: 80 },
-      {
-        duration: 1.2,
-        ease: "power3.inOut",
-        y: 0,
-        stagger: 0.1,
-        delay: delay2,
-      },
-      1
-    )
-    .fromTo(
-      Text1.chars,
-      { y: 0 },
-      {
-        y: -80,
-        duration: 1.2,
-        ease: "power3.inOut",
-        stagger: 0.1,
-        delay: delay,
-      },
-      0
-    )
-    .to(
-      Text2.chars,
-      {
-        y: -80,
-        duration: 1.2,
-        ease: "power3.inOut",
-        stagger: 0.1,
-        delay: delay2,
-      },
-      1
-    );
+  tl
+    // Text1 starts visible — slide out, then Text2 slides in
+    .fromTo(Text1.chars, { y: 0 }, { y: -80, duration: 1.2, ease: "power3.inOut", stagger: 0.1, delay }, 0)
+    .fromTo(Text2.chars, { opacity: 0, y: 80 }, { opacity: 1, duration: 1.2, ease: "power3.inOut", y: 0, stagger: 0.1, delay }, 0)
+    // Text2 slides out, then Text3 (if any) slides in
+    .fromTo(Text2.chars, { y: 0 }, { y: -80, duration: 1.2, ease: "power3.inOut", stagger: 0.1, delay: delay2 }, 1);
+
+  if (Text3) {
+    tl
+      .fromTo(Text3.chars, { opacity: 0, y: 80 }, { opacity: 1, duration: 1.2, ease: "power3.inOut", y: 0, stagger: 0.1, delay: delay2 }, 1)
+      // Text3 slides out, Text1 slides back in
+      .fromTo(Text3.chars, { y: 0 }, { y: -80, duration: 1.2, ease: "power3.inOut", stagger: 0.1, delay: delay3 }, 2)
+      .fromTo(Text1.chars, { y: 80 }, { y: 0, duration: 1.2, ease: "power3.inOut", stagger: 0.1, delay: delay3 }, 2);
+  } else {
+    // Original 2-text loop: Text2 goes out, Text1 comes back
+    tl.fromTo(Text1.chars, { y: 80 }, { y: 0, duration: 1.2, ease: "power3.inOut", stagger: 0.1, delay: delay2 }, 1);
+  }
 }
