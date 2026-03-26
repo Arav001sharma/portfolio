@@ -5,6 +5,13 @@ import { MdArrowBack, MdArrowForward } from "react-icons/md";
 
 const projects = [
   {
+    title: "FlowPilot - AI/ML No-Code Low-Code Automation Tool",
+    category: "AI Ops Platform",
+    tools: "React, AI/ML, No-Code/Low-Code",
+    image: "/images/flowpilot.jpg",
+    caseStudyLink: "https://drive.google.com/file/d/1qFvi-m6o-fVHuNNvL7qxRsFD9mNvoiq7/view?usp=sharing"
+  },
+  {
     title: "Solid Starters",
     category: "Low-Code Platform",
     tools: "Angular, Next.js, NestJS, MongoDB",
@@ -111,6 +118,11 @@ const Work = () => {
                         <div className="carousel-tools">
                           <span className="tools-label">Tools & Features</span>
                           <p>{project.tools}</p>
+                          {(project as any).caseStudyLink && (
+                            <a href={(project as any).caseStudyLink} target="_blank" rel="noopener noreferrer" className="case-study-btn" style={{marginTop: '20px', display: 'inline-block', color: '#fff', border: '1px solid rgba(255, 255, 255, 0.5)', padding: '8px 20px', borderRadius: '50px', textDecoration: 'none', fontSize: '14px', transition: 'all 0.3s ease', cursor: 'pointer', pointerEvents: 'auto'}} onMouseOver={(e: any) => {e.target.style.background = 'rgba(255,255,255,0.1)'; e.target.style.borderColor = '#fff';}} onMouseOut={(e: any) => {e.target.style.background = 'transparent'; e.target.style.borderColor = 'rgba(255, 255, 255, 0.5)';}}>
+                              View Case Study
+                            </a>
+                          )}
                         </div>
                       </div>
                     </div>
